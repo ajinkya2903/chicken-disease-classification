@@ -1,0 +1,40 @@
+schema: '2.0'
+stages:
+  data_ingestion:
+    cmd: python src/ImageClassifier/pipeline/stage_01_data_ingestion.py
+    deps:
+    - path: config/config.yaml
+      md5: 56339f12d2c0820eed9af12022d65fc5
+      size: 802
+    - path: src/ImageClassifier/pipeline/stage_01_data_ingestion.py
+      md5: c63057025c5a47f9833e1846d7472629
+      size: 916
+    outs:
+    - path: artifacts/data_ingestion/Chicken-fecal-images
+      md5: 9e1f8dd2eae3c29e9d635df89d438ae4.dir
+      size: 12207807
+      nfiles: 390
+  prepare_base_model:
+    cmd: python src/ImageClassifier/pipeline/stage_02_prepare_base_model.py
+    deps:
+    - path: config/config.yaml
+      md5: 56339f12d2c0820eed9af12022d65fc5
+      size: 802
+    - path: src/ImageClassifier/pipeline/stage_02_prepare_base_model.py
+      md5: 06751fa1f61441099a2936ef15d69108
+      size: 960
+    params:
+      params.yaml:
+        CLASSES: 2
+        IMAGE_SIZE:
+        - 224
+        - 224
+        - 3
+        INCLUDE_TOP: false
+        LEARNING_RATE: 0.01
+        WEIGHTS: imagenet
+    outs:
+    - path: artifacts/prepare_base_model
+      md5: 6cd3fbff5b913319e4bc8167be760568.dir
+      size: 118054512
+      nfiles: 2

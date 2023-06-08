@@ -2,6 +2,7 @@ from ImageClassifier.entity.config_entity import TrainingConfig
 import tensorflow as tf
 import pathlib as Path
 
+
 class Training:
     def __init__(self, config: TrainingConfig):
         self.config = config
@@ -74,6 +75,6 @@ class Training:
         )
 
         self.save_model(
-                path=self.config.trained_model_path,
-                model=self.model
-            )
+            path=self.config.trained_model_path,
+            model=self.model
+        )
